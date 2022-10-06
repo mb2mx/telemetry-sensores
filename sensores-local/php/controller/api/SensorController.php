@@ -54,9 +54,8 @@ class SensorController extends BaseController
                 foreach ($arrSensoresDevice as $valor) {
                     foreach ($arrSensorDataReq as $cSensorReq) {
                         if ($valor['code_sensor'] == $cSensorReq['codSensor']) {
-                            $applyFactor = factorConvertion((double)$cSensorReq['value'] ,
-                                                            (double)$valor['factor']);
-                           // $arrSensorsDevice = $daoSensor->saveDataReport($valor['id_device'], $valor['id_sensor'], $applyFactor, $fechaActual);
+                            $applyFactor =  $this->factorConvertion($valor['code_sensor'], (float)$cSensorReq['value'], (float)$valor['factor']);
+                            $arrSensorsDevice = $daoSensor->saveDataReport($valor['id_device'], $valor['id_sensor'], $applyFactor, $fechaActual);
                         }
                     }
                 }
@@ -109,16 +108,15 @@ class SensorController extends BaseController
         }
     }
 
-    private function factorConvertion($typeFactor, $value, $valueFactor){
-    
-        if($typeFactor =='S-HUM'){
-            return (double)$value + $valueFactor;
-        }if else ($typeFactor =='S-TEMP'){
-            return (double)$value  + $valueFactor;
-        } if else($typeFactor =='S-TEMP'){
-            return (double)$value  * $valueFactor;
+    public function factorConvertion($typeFactor, $value, $valueFactor)
+    {
+
+        if ($typeFactor == 'S-HUM') {
+            return (float)$value + $valueFactor;
+        } else if ($typeFactor == 'S-TEMP') {
+            return (float)$value  + $valueFactor;
+        } else if ($typeFactor == 'S-CLP') {
+            return (float)$value  * $valueFactor;
         }
-
-
     }
 }

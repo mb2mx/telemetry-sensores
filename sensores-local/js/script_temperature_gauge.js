@@ -1,17 +1,13 @@
-
     //-------------------------------------------------------------------------------------------------
     google.charts.load('current', {
         'packages': ['gauge']
     });
-
-
 
     function genericRefreshData() {
         client = JSON.parse(window.localStorage.getItem('username'));
         var optionsPressure = initDrawLineLpaChart(false);
         var optionsTemperature = initDrawTemperatureChart(false);
         var optCompHumedity = initDrawHumidityChart(false);
-
 
         $.ajax({
            
@@ -44,13 +40,10 @@
             width: 350, height: 250,
             greenFrom: 00,
             greenTo: 25,
-
             yellowFrom: 25,
             yellowTo: 75,
-
             redFrom: 75,
             redTo: 100,
-
             minorTicks: 5
         };
 
@@ -65,6 +58,7 @@
     //-------------------------------------------------------------------------------------------------
 
     function reDrawLineLpaChart(dataResponse, options) {
+        
         let hasElementMax = dataResponse.filter(vendor => vendor['code'] === 'S-CLP' && vendor['type_calc'] === 'MAX')
         let dateRegister = hasElementMax[0].created_at;
 
@@ -83,6 +77,7 @@
         ]);
         var chart = new google.visualization.Gauge(document.getElementById('chart_lpa'));
         chart.draw(data, options);
+
     }
     //NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
 
@@ -97,16 +92,12 @@
         ]);
         var options = {
             width: 350, height: 250,
-
             greenFrom: 00,
             greenTo: 23,
-
             yellowFrom: 23,
             yellowTo: 30,
-
             redFrom: 30,
             redTo: 100,
-
             minorTicks: 20,
             majorTicks: ['0 °C', '100 °C']
 
@@ -136,7 +127,6 @@
             dataTemperatureMax = hasElementMax[0].max;
         }
         var var_temperature_max = parseFloat(dataTemperatureMax).toFixed(2)
-
 
         var data = google.visualization.arrayToDataTable([
             ['Label', 'Value'],
@@ -218,7 +208,6 @@
         document.getElementById('humidityDateMin').innerHTML = moment(dateRegisterMin).format('MM/DD/YYYY HH:mm A');
         document.getElementById("footerHum").style.display = 'block';
 
-
         let dataaHumidityMax = 0;
         let dataaHumidityMin = 0;
 
@@ -228,7 +217,6 @@
         if (hasElementMin) {
             dataaHumidityMin = hasElementMin[0].max;
         }
-
 
         var var_humidity_max = parseFloat(dataaHumidityMax).toFixed(2)
         var var_humidity_min = parseFloat(dataaHumidityMin).toFixed(2)
@@ -245,8 +233,8 @@
         ]);
 
         var chart = new google.visualization.Gauge(document.getElementById('chart_humidity'));
-
         var chart2 = new google.visualization.Gauge(document.getElementById('chart_humidity2'));
+       
         chart.draw(data, options.opt1);
         chart2.draw(data2, options.opt2);
     }
@@ -255,8 +243,6 @@
 
 
 //NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
-
- 
     window.onload = function () {
         initDrawLineLpaChart(true);
         initDrawTemperatureChart(true);
@@ -266,7 +252,6 @@
         setInterval(function () {
             genericRefreshData();
         }, 10000);
-    
-    
+       
     };
  

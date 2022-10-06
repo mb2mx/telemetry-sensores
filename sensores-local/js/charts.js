@@ -1,20 +1,16 @@
-
-
 //NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
 function refreshData(myLineChart) {
     client = JSON.parse(window.localStorage.getItem('username'));
 
     $.ajax({
         url: 'php/index.php/sensores/chart',
-        // use value from select element
-        // data: 'cdClient=' + $("#cdClient").val(),
         data: 'cdClient=' + client.code,
         dataType: 'json',
         success: function (responseText) {
 
             let arrayLabels = responseText[0][0].labels;
             let dataS = createDataset(responseText[0][0].arraySensor);
-			let labelReverse=arrayLabels.reverse();
+            let labelReverse = arrayLabels.reverse();
             let arrayLabelsFormat = labelReverse.map(label => {
                 return moment(label).format("HH:mm:ss")
             });
@@ -22,7 +18,7 @@ function refreshData(myLineChart) {
             let ds = [{
                 data: dataS['temperature'],
                 label: "Temperatura",
-                 borderColor: "#ba3c57",
+                borderColor: "#ba3c57",
                 backgroundColor: "#ba3c57",
                 borderWidth: 2,
                 fill: false
@@ -33,7 +29,6 @@ function refreshData(myLineChart) {
                 backgroundColor: "rgb(62,149,205)",
                 borderWidth: 2,
                 fill: false
-
             },
             {
                 data: dataS['lpa'],
@@ -42,14 +37,11 @@ function refreshData(myLineChart) {
                 backgroundColor: "#ffb266",
                 borderWidth: 2,
                 fill: false
-
             },
             ];
 
             myLineChart.data.labels = arrayLabelsFormat;
             myLineChart.data.datasets = ds;
-
-            // re-render the chart
             myLineChart.update();
         },
         error: function (jqXHR, textStatus, errorThrown) {
@@ -76,17 +68,15 @@ function createDataset(arrayData) {
     obj['temperature'] = arrayTemp;
     obj['lpa'] = arrayLpa;
 
-
     return obj;
 
 }
 //NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
 
 
- 
-$(document).ready(function(){
+$(document).ready(function () {
     var ctx = document.getElementById('myChart').getContext('2d');
-     
+
     var myChart = new Chart(ctx, {
         type: 'line',
         data: {
@@ -103,21 +93,19 @@ $(document).ready(function(){
                 data: [
                 ],
                 label: "Humedad",
-                 borderColor: "#3e95cd",
+                borderColor: "#3e95cd",
                 backgroundColor: "rgb(62,149,205)",
                 borderWidth: 2,
                 fill: false
-    
             },
             {
                 data: [
                 ],
                 label: "LPA",
-                 borderColor: "#ffb266",
+                borderColor: "#ffb266",
                 backgroundColor: "#ffb266",
                 borderWidth: 2,
                 fill: false
-    
             },
             ]
         },
@@ -139,19 +127,21 @@ $(document).ready(function(){
                 yAxes: [{
                     ticks: {
                         beginAtZero: true,
+                        
                     }
-                }] 
-            }
+                }]
+            },
+            locale: 'en-US'
+
         }
     });
 
     fetchRequestApi(myChart);
- })
+})
 
 
 
-
-function fetchRequestApi(myLineChart){
+function fetchRequestApi(myLineChart) {
     client = JSON.parse(window.localStorage.getItem('username'));
 
     $.ajax({
@@ -159,11 +149,10 @@ function fetchRequestApi(myLineChart){
         data: 'cdClient=' + client.code,
         dataType: 'json',
         success: function (responseText) {
-           
-            
+
             let arrayLabels = responseText[0][0].labels;
             let dataS = createDataset(responseText[0][0].arraySensor);
-			let labelReverse=arrayLabels.reverse();
+            let labelReverse = arrayLabels.reverse();
             let arrayLabelsFormat = labelReverse.map(label => {
                 return moment(label).format("HH:mm:ss")
             });
@@ -171,7 +160,7 @@ function fetchRequestApi(myLineChart){
             let ds = [{
                 data: dataS['temperature'],
                 label: "Temperatura",
-                 borderColor: "#ba3c57",
+                borderColor: "#ba3c57",
                 backgroundColor: "#ba3c57",
                 borderWidth: 2,
                 fill: false
@@ -182,7 +171,6 @@ function fetchRequestApi(myLineChart){
                 backgroundColor: "rgb(62,149,205)",
                 borderWidth: 2,
                 fill: false
-
             },
             {
                 data: dataS['lpa'],
@@ -191,18 +179,16 @@ function fetchRequestApi(myLineChart){
                 backgroundColor: "#ffb266",
                 borderWidth: 2,
                 fill: false
-
             },
             ];
 
             myLineChart.data.labels = arrayLabelsFormat;
             myLineChart.data.datasets = ds;
-
-            // re-render the chart
             myLineChart.update();
+
             setInterval(function () {
                 refreshData(myLineChart);
-            }, 5000);
+            }, 10000);
         },
         error: function (jqXHR, textStatus, errorThrown) {
             console.log(errorThrown + ': ' + textStatus);
