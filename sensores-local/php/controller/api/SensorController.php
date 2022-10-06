@@ -54,9 +54,9 @@ class SensorController extends BaseController
                 foreach ($arrSensoresDevice as $valor) {
                     foreach ($arrSensorDataReq as $cSensorReq) {
                         if ($valor['code_sensor'] == $cSensorReq['codSensor']) {
-                            $factor=(double)$cSensorReq['value'] * (double)$valor['factor'];
-                            $applyFactor=(double)$cSensorReq['value'] +$factor;
-                            $arrSensorsDevice = $daoSensor->saveDataReport($valor['id_device'], $valor['id_sensor'], $applyFactor, $fechaActual);
+                            $applyFactor = factorConvertion((double)$cSensorReq['value'] ,
+                                                            (double)$valor['factor']);
+                           // $arrSensorsDevice = $daoSensor->saveDataReport($valor['id_device'], $valor['id_sensor'], $applyFactor, $fechaActual);
                         }
                     }
                 }
@@ -107,5 +107,18 @@ class SensorController extends BaseController
                 array('Content-Type: application/json', $strErrorHeader)
             );
         }
+    }
+
+    private function factorConvertion($typeFactor, $value, $valueFactor){
+    
+        if($typeFactor =='S-HUM'){
+            return (double)$value + $valueFactor;
+        }if else ($typeFactor =='S-TEMP'){
+            return (double)$value  + $valueFactor;
+        } if else($typeFactor =='S-TEMP'){
+            return (double)$value  * $valueFactor;
+        }
+
+
     }
 }
