@@ -1,18 +1,22 @@
- 
- function logout(){
 
-  window.localStorage.clear();
-  window.location.href = "login.html";
+
+$(document).ready(function () {
+  
+  loadInfoInit();
+
+ 
+  
+});
+function loadInfoInit(){
+client = JSON.parse(window.localStorage.getItem('username'));
+$("#nameClient").text(client.name);
 
 }
 
-function test(){
-  client = JSON.parse(window.localStorage.getItem('username'));
-  //setCookie(client);
+function logout(){
 
-  $("#error_message").text(client.name);
+window.localStorage.clear();
+window.location.href = "login.html";
 
 }
 
- 
- 

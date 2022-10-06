@@ -1,4 +1,8 @@
 <?php
+
+header('Cache-Control: no-cache, no-store, must-revalidate');
+header('Pragma: no-cache');
+header('Expires: 0');
 //-------------------------------------------------------------------------------------------
 require 'php/gauge/config.php';
 
@@ -24,6 +28,7 @@ if (!$result) { {
         echo "Error: " . $sql . "<br>" . $db->error;
     }
 }
+
 //-------------------------------------------------------------------------------------------
 ?>
 
@@ -31,11 +36,12 @@ if (!$result) { {
 <html lang="en">
 
 <head>
-    
-	
-	<meta http-equiv='cache-control' content='no-cache'>
-	<meta http-equiv='expires' content='0'>
-	<meta http-equiv='pragma' content='no-cache'>
+
+
+    <meta http-equiv="Expires" content="0">
+    <meta http-equiv="Last-Modified" content="0">
+    <meta http-equiv="Cache-Control" content="no-cache, mustrevalidate">
+    <meta http-equiv="Pragma" content="no-cache">
 
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -65,13 +71,13 @@ if (!$result) { {
 
 </head>
 
-<body id="page-top" onload="test()">
+<body id="page-top">
 
     <!-- Navigation-->
     <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
         <div class="container">
 
-            <a class="navbar-brand" href="#page-top" id="error_message"></a>
+            <a class="navbar-brand" href="#page-top" id="nameClient"></a>
             <button class="navbar-toggler text-uppercase font-weight-bold bg-primary text-white rounded py-1" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                 <i class="fas fa-bars"></i>
             </button>
@@ -114,7 +120,7 @@ if (!$result) { {
 
                             <div>
                                 <canvas id="myChart"></canvas>
- 
+
                             </div>
 
                         </div>
@@ -127,11 +133,11 @@ if (!$result) { {
 
 
     <!-- About Section-->
-    <section class="page-section">
+    <section class="page-section py-0">
 
         <div class="container">
             <!-- Portfolio Section Heading-->
-            <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0"  id="dashboard">Dashboard</h2>
+            <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0" id="dashboard">Dashboard</h2>
             <!-- Icon Divider-->
             <div class="divider-custom">
                 <div class="divider-custom-line"></div>
@@ -204,7 +210,7 @@ if (!$result) { {
     </section>
 
     <!-- Contact Section-->
-    <section class="page-section py-0" >
+    <section class="page-section py-0">
         <div class="container">
             <!-- Portfolio Section Heading-->
             <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0" id="datos">Datos</h2>
@@ -274,9 +280,9 @@ if (!$result) { {
                                                 while ($row = mysqli_fetch_assoc($result)) { ?>
                                                     <tr>
                                                         <th scope="row"><?php echo $i++; ?></th>
-                                                        <td><?PHP echo round($row['temperature'],3); ?></td>
-                                                        <td><?PHP echo round($row['humidity'],3); ?></td>
-                                                        <td><?PHP echo round($row['pla'],3); ?></td>
+                                                        <td><?PHP echo round($row['temperature'], 3); ?></td>
+                                                        <td><?PHP echo round($row['humidity'], 3); ?></td>
+                                                        <td><?PHP echo round($row['pla'], 3); ?></td>
 
                                                         <td><?PHP echo date("Y-m-d h:i A", strtotime($row['created_date'])); ?></td>
                                                     </tr>
