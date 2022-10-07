@@ -6,21 +6,23 @@
 #include <DHT.h>
 #include <DHT_U.h>
 
-DHT dht(D1, DHT11);
+#define DHTTYPE DHT11   // DHT 11
+//#define DHTTYPE DHT22   // DHT 22  
+DHT dht(D1, DHTTYPE);
 
 // ############# VARIABLES ############### //
 
-const char *SSID = "A50"; // Network Wi-Fi
-const char *PASSWORD = "12345678"; // Password Wifi
+const char *SSID = "Repetidor2.4"; // Network Wi-Fi
+const char *PASSWORD = "Beatle99"; // Password Wifi
 
 String BASE_URL = "https://soportec.net";
 
 // Pins
 int sensorPin = A0;
 
-String codeClient="C-HRAEB";
-String codeDevice="D-HRAEB";
-int timeToRequest =1;
+String codeClient="C-HAP";
+String codeDevice="D-HAP";
+int timeToRequest =25;
 
 
 //IPAddress ip(172, 16, 100, 52); // mudar o ultimo digito
@@ -164,19 +166,52 @@ void initSensors()
 
 String serializeComplex()
 {
-  
-  float analogica = 0;
-  // Reading temperature and humidity and analog
-  float temp = dht.readTemperature();
-  float hume = dht.readHumidity();
-  // Reading from analog sensor
-  analogica = analogRead(sensorPin)*0.1;
 
-  if (isnan(hume) && isnan(temp)) {
-     Serial.println("Failed to read from DHT sensor!");
-     temp=0;
-     hume=0;
-   }
+  int numAverage=10;
+  float averageDiv=10;
+  Serial.println("Average ...");
+  
+  float temp = 0 ;
+  float hume = 0 ;
+  float analog = 0;
+   while(numAverage > 0) { 
+    
+     analog = analog+ analogRead(sensorPin);
+     temp = temp+ dht.readTemperature();;
+     hume = hume+ dht.readHumidity();
+
+    //Serial.println("Analog");
+    // Serial.print(analog);
+    //Serial.println("Temp");
+    //Serial.print(temp);
+
+    //  Serial.println("Hume");
+    //  Serial.print(hume);
+
+     if (isnan(hume) && isnan(temp)) {
+        Serial.println("Failed to read from DHT sensor!");
+        temp=temp+0;
+        hume=hume +0;
+    }
+
+     numAverage--;
+     delay(100);
+
+}
+  float averageTemp = temp / averageDiv;
+  float averageHum = hume / averageDiv;
+  float averageAnalog = analog / averageDiv;
+
+  Serial.println("#################################");
+   
+  //float analogica = 0;
+  // Reading temperature and humidity and analog
+  //float temp = dht.readTemperature();
+  //float hume = dht.readHumidity();
+  // Reading from analog sensor
+  //analogica = analogRead(sensorPin)*0.1;
+
+ 
 
   String json;
   StaticJsonDocument<300> doc;
@@ -185,20 +220,20 @@ String serializeComplex()
 
   StaticJsonDocument<300> tempDoc;
   tempDoc["codSensor"] = "S-TEMP";
-  tempDoc["value"] = temp;
+  tempDoc["value"] = averageTemp;
   StaticJsonDocument<300> humeDoc;
   humeDoc["codSensor"] = "S-HUM";
-  humeDoc["value"] = hume;
+  humeDoc["value"] = averageHum;
   StaticJsonDocument<300> analogicaDoc;
   analogicaDoc["codSensor"] = "S-CLP";
-  analogicaDoc["value"] = analogica;
+  analogicaDoc["value"] = averageAnalog;
 
   JsonArray arr = doc.createNestedArray("sensorData");
   arr.add(tempDoc);
   arr.add(humeDoc);
   arr.add(analogicaDoc);
 
-  serializeJson(doc, json);
+  serializeJsonPretty(doc, json);
   Serial.println(json);
   return json;
 }
