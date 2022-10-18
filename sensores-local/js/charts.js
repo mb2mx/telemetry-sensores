@@ -123,6 +123,8 @@ $(document).ready(function () {
             pointRadius: 3.5,
             pointHoverRadius: 6,
             responsive: true,
+            maintainAspectRatio: false,
+
             scales: {
                 yAxes: [{
                     ticks: {

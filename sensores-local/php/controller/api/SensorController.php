@@ -111,12 +111,13 @@ class SensorController extends BaseController
     public function factorConvertion($typeFactor, $value, $valueFactor)
     {
 
-        if ($typeFactor == 'S-HUM') {
+        if ($typeFactor == 'S-HUM' && $valueFactor != 0) {
             return (float)$value + $valueFactor;
-        } else if ($typeFactor == 'S-TEMP') {
+        } else if ($typeFactor == 'S-TEMP' && $valueFactor != 0) {
             return (float)$value  + $valueFactor;
-        } else if ($typeFactor == 'S-CLP') {
+        } else if ($typeFactor == 'S-CLP' && $valueFactor !=0) {
             return (float)$value  * $valueFactor;
         }
+        return $value;
     }
 }

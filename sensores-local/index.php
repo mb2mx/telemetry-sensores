@@ -75,14 +75,14 @@ if (!$result) { {
     <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
         <div class="container">
 
-            <a class="navbar-brand" href="#page-top" id="nameClient"></a>
+            <a class="navbar-brand ellipsis" href="#page-top" id="nameClient"></a>
             <button class="navbar-toggler text-uppercase font-weight-bold bg-primary text-white rounded py-1" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                 <i class="fas fa-bars"></i>
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="#graficas">Gráfica</a></li>
-                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="#dashboard">Dashboard</a></li>
+                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="#dashboard">Tablero</a></li>
                     <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="#datos">Datos</a></li>
                     <li class="nav-item mx-0 mx-lg-1 pt-2"><a class="btn btn-outline-danger " onclick="logout()">Salir</a></li>
 
@@ -105,19 +105,16 @@ if (!$result) { {
                 <div class="divider-custom-line"></div>
             </div>
             <!-- Portfolio Grid Items-->
-            <div class="row justify-content-center">
+            <div class="row justify-content-center " id="chart-center">
                 <div class="col-md-12 col-lg-12 mb-12">
                     <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="">
 
                         <!-- Portfolio Item 1-->
-                        <div class="col-md-12 col-lg-12 mb-12">
+                        <div class="col-md-12 col-lg-12 mb-12" style="height: 400px">
                             <!-- <canvas id="grafica"></canvas>-->
-
-                            <div>
-                                <canvas id="myChart"></canvas>
-
-                            </div>
-
+ 
+                                <canvas id="myChart" ></canvas>
+ 
                         </div>
                     </div>
 
@@ -132,7 +129,7 @@ if (!$result) { {
 
         <div class="container">
             <!-- Portfolio Section Heading-->
-            <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0" id="dashboard">Dashboard</h2>
+            <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0" id="dashboard">Tablero</h2>
             <!-- Icon Divider-->
             <div class="divider-custom">
                 <div class="divider-custom-line"></div>

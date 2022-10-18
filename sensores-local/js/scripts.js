@@ -9,6 +9,10 @@
 // 
 
 window.addEventListener('DOMContentLoaded', event => {
+    // Handler for .ready() called.
+    // $('html, body').animate({
+    //     scrollTop: $('#chart-center').offset().top
+    // }, 'slow');
 
     // Navbar shrink function
     var navbarShrink = function () {
