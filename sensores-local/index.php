@@ -37,6 +37,7 @@ if (!$result) { {
 
 <head>
 
+
     <meta http-equiv="Expires" content="0">
     <meta http-equiv="Last-Modified" content="0">
     <meta http-equiv="Cache-Control" content="no-cache, mustrevalidate">
@@ -67,6 +68,7 @@ if (!$result) { {
 
         }
     </script>
+
 </head>
 
 <body id="page-top">
@@ -92,9 +94,12 @@ if (!$result) { {
         </div>
     </nav>
 
+
     <!-- Portfolio Section-->
     <section class="page-section " id="graficas">
         <div class="container">
+
+
             <!-- Portfolio Section Heading-->
             <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Gráfica</h2>
             <!-- Icon Divider-->
@@ -125,7 +130,7 @@ if (!$result) { {
 
 
     <!-- About Section-->
-    <section class="page-section py-0">
+    <section class="page-section">
 
         <div class="container">
             <!-- Portfolio Section Heading-->
@@ -229,6 +234,7 @@ if (!$result) { {
         </div>
     </section>
 
+
     <!-- Copyright Section-->
     <div class="copyright py-4 text-center text-white">
         <div class="container"><small>Copyright &copy;Soportec 2022</small></div>
@@ -300,6 +306,7 @@ if (!$result) { {
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="js/validSession.js"></script>
+
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
     <!-- --------------------------------------------------------------------- -->
@@ -316,6 +323,9 @@ if (!$result) { {
     <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
     <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
     <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+
+
+
 
 </body>
 
