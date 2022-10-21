@@ -5,6 +5,7 @@
 #include <ArduinoJson.h>
 #include <DHT.h>
 #include <DHT_U.h>
+#define LED_WIFFI D2 // Led in NodeMCU at pin GPIO16 (D0).
 
 //#define DHTTYPE DHT11   // DHT 11
 #define DHTTYPE DHT22   // DHT 22  
@@ -20,9 +21,9 @@ String BASE_URL = "https://tele-metry.net";
 // Pins
 int sensorPin = A0;
 
-String codeClient="C-HAP";
-String codeDevice="D-HAP";
-int timeToRequest =1;
+String codeClient="C-HRAEB";
+String codeDevice="D-HRAEB";
+int timeToRequest =20;
 
 
 //IPAddress ip(172, 16, 100, 52); // mudar o ultimo digito
@@ -47,6 +48,7 @@ HTTPClient http; // Declare object of class HTTPClient
 
 void setup()
 {
+  pinMode(LED_WIFFI, OUTPUT);
 
   initSerial();
   initWiFi();
@@ -64,7 +66,7 @@ void loop()
     httpRequest("/sensores/php/index.php/devices/sensores");
   }else{
     initWiFi();
-    }
+  }
   
 
   Serial.println("Wainting time to request");
@@ -144,7 +146,11 @@ void initWiFi()
   // Wait for connection
   while (WiFi.status() != WL_CONNECTED)
   {
-    delay(100);
+    digitalWrite(LED_WIFFI, HIGH);
+    delay(1000);
+    digitalWrite(LED_WIFFI, LOW); 
+    delay(1000);
+
     Serial.print(".");
   }
 
@@ -154,6 +160,8 @@ void initWiFi()
   // If connection successful show IP address in serial monitor
   Serial.println();
   Serial.print("Conected to wi-fi" + String(SSID) + " | IP => ");
+  digitalWrite(LED_WIFFI, HIGH);
+
   Serial.println(WiFi.localIP());
 }
 

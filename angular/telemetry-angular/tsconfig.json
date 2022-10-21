@@ -20,7 +20,17 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+     /**Add**/
+     "resolveJsonModule": true,
+     "allowSyntheticDefaultImports": true,
+     "paths": {
+       "@environment/*": ["environments/*"],
+       "@app/core/*": ["app/*"],
+       "@services/*": ["app/service/*"],
+       "@models/*": ["app/models/*"],
+     }
+ 
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

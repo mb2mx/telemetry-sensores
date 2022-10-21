@@ -11,8 +11,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthService } from './modules/auth/services/auth.service';
 import { environment } from 'src/environments/environment';
+import { DataTablesModule } from "angular-datatables";
+
 // #fake-start#
-import { FakeAPIService } from './_fake/fake-api.service';
+import { FakeAPIService } from './_fake/fake-api.service'; 
 // #fake-end#
 
 function appInitializer(authService: AuthService) {

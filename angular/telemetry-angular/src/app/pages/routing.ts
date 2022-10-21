@@ -10,7 +10,12 @@ const Routing: Routes = [
     path: 'builder',
     loadChildren: () =>
       import('./builder/builder.module').then((m) => m.BuilderModule),
-  },   
+  },
+  {
+    path: 'ticket',
+    loadChildren: () =>
+      import('../modules/ticket/ticket.module').then((m) => m.TicketModule),
+  },
   {
     path: '',
     redirectTo: '/dashboard',
